@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drone</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+
+    <style>
+       
+        .dropzone {
+         
+          height: 400px;
+          
+          margin-bottom: 10px;
+          padding: 10px;
+        }
+
+        img{
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <div class="card" id="drone-app">
+          <h5 class="card-title">Dance Moves</h5>
+          
+          
+          <div class="card command">
+            <img id="btnturnleft" src="Turnleft.jpg" />
+          </div>
+
+          <div class="card command">
+            <img id="btnturnleft" src="Turnright.jpg" />
+          </div>
+
+          <div class="card command">
+            <img id="btnturnleft" src="Goup.jpg" />
+          </div>
+
+          <div class="card command">
+            <img id="btnturnleft" src="Turnupsidedown.jpg" />
+          </div>
+
+          
+
+          <div class="card command">
+              <button class="fas fa-fire-extinguisher fa-5x" id="btnemergency"></button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+            <div id="drone-status">
+                <h5 class="card-title">Status</h5>
+
+            </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+            <h5 class="card-title">Flight Plan</h5>  
+            <div class='card' id="flightplan">
+                    <div class="card-header">
+                        Take Off
+                    </div>
+                    <div class="dropzone" >
+                        <p>drag here...</p>
+                    </div>
+                    <div class="card-footer">
+                        Land
+                    </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+
+  <!--socket.io.js is automatically added by node-->
+  <script src="socket.io/socket.io.js"></script>
+  <!--jQuery Used For Some Frontend Tasks-->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script>
+    //Connecting To socket.io
+    var socket = io.connect();
+    socket.on("Connection",function(){
+        alert("Ready!");
+    });
+
+    // btntakeoff.addEventListener('click', function() {
+    // socket.emit('takeoff', socket.id);
+    // });
+
+    // btnland.addEventListener('click', function() {
+    // socket.emit('land', socket.id);
+    // });
+
+    // btnturnleft.addEventListener('click', function() {
+    // socket.emit('turn','left', socket.id);
+    // });
+
+    // btnturnright.addEventListener('click', function() {
+    // socket.emit('turn', 'right', socket.id);
+    // });
+
+    // btnup.addEventListener('click', function() {
+    // socket.emit('up', socket.id);
+    // });
+
+    // btndown.addEventListener('click', function() {
+    // socket.emit('down', socket.id);
+    // });
+
+    // btnfrontflip.addEventListener('click', function() {
+    // socket.emit('frontflip', socket.id);
+    // });
+
+    // btnemergency.addEventListener('click', function() {
+    // socket.emit('emergency', socket.id);
+    // });
+
+    var commands = document.getElementsByClassName('command'), el = null;
+
+    for (var i = 0; i < commands.length; i++) {
+        el = commands[i];
+        
+        el.setAttribute('draggable', 'true');
+    
+        el.addEventListener('dragstart', function (e) {
+        e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
+        e.dataTransfer.setData('Text', this.id); // required otherwise doesn't work
+        });
+    }
+
+  var dragged;
+
+    /* events fired on the draggable target */
+    document.addEventListener("drag", function( event ) {
+
+    }, false);
+
+    document.addEventListener("dragstart", function( event ) {
+        // store a ref. on the dragged elem
+        dragged = event.target;
+        // make it half transparent
+        event.target.style.opacity = .5;
+    }, false);
+
+    document.addEventListener("dragend", function( event ) {
+        // reset the transparency
+        event.target.style.opacity = "";
+    }, false);
+
+    /* events fired on the drop targets */
+    document.addEventListener("dragover", function( event ) {
+        // prevent default to allow drop
+        event.preventDefault();
+    }, false);
+
+    document.addEventListener("dragenter", function( event ) {
+        // highlight potential drop target when the draggable element enters it
+        if ( event.target.className == "dropzone" ) {
+            event.target.style.background = "purple";
+        }
+
+    }, false);
+
+    document.addEventListener("dragleave", function( event ) {
+        // reset background of potential drop target when the draggable element leaves it
+        if ( event.target.className == "dropzone" ) {
+            event.target.style.background = "";
+        }
+
+    }, false);
+
+    document.addEventListener("drop", function( event ) {
+        // prevent default action (open as link for some elements)
+        event.preventDefault();
+        // move dragged elem to the selected drop target
+        if ( event.target.className == "dropzone" ) {
+            event.target.style.background = "";
+            var nodeCopy = dragged.cloneNode(true);
+            event.target.appendChild(nodeCopy);
+        }
+    
+    }, false);
+  </script>      
+</body>
+</html>
