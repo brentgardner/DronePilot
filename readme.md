@@ -1,6 +1,6 @@
 # Drone Pilot
 
-A node.js server, socket.io/express client for the Rabits to program a drone
+A node.js server, socket.io/express client for the Rabits to program a drone.  This was put together for the amazing children in the Rabbit class at the equally amazing [Riverfield Country Day School](http://www.riverfield.org/)
 
 ## Getting Started
 
@@ -59,4 +59,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * stood on the shoulders of everyone that figured out the hard stuff first
+* the amazing children of the Rabbit class
 * Love the [RollingSpider](https://github.com/voodootikigod/node-rolling-spider)
