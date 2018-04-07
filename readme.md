@@ -16,25 +16,29 @@ you can download an install binary directly from [Node.js](https://nodejs.org/en
 
 ### Installing
 
-```
+
 Download or fork the repository
-```
 
-```
 open your OS's console or the Node console
+
+CD into the directory where you saved the repository and then into the dronepilot directory - You should see the app.js file.
+```
+CD dronpilot
 ```
 
-```
-CD into the directory where you saved the repository - You should see the app.js file.
-```
+Install all the dependencies
 
 ```
-run:  node app.js
+npm install
 ```
 
+Start the node server
 ```
+node app.js
+```
+
 The server should start and invite you to launch the client in a browser by visiting: [http://localhost:3005](http://localhost:3005)
-```
+
 
 Also helps if you have a drone but you can take a look without one...
 
