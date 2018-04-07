@@ -36,6 +36,7 @@ const drone = (function() {
 
   /**
    * Makes drone take off
+   * Translates to Turn On
    * @return {Promise}
    */
   function takeoff() {
@@ -64,6 +65,7 @@ const drone = (function() {
 
   /**
    * Lands drone
+   * Translates to stop
    * @return {Promise}
    */
   function land() {
@@ -86,6 +88,7 @@ const drone = (function() {
 
   /**
    * Move drone
+   * Translates to Go Up and 2x for go Up Higher
    * @param {Object}
    * @return {Promise}
    */
@@ -112,6 +115,7 @@ const drone = (function() {
 
   /**
    * Turn left or right
+   * Translates to go left and go right
    * @return {Promise}
    */
   function turn({ direction = 'right', speed = 60, steps = 2 }) {
@@ -165,6 +169,11 @@ const drone = (function() {
 
   }
 
+  /**
+   * Flips the dron over towards the fron
+   * Translates to Turn up side down
+   * @return {Promise}
+   */
   function frontflip() {
 
     console.log('frontflip...');
@@ -184,6 +193,35 @@ const drone = (function() {
     return action;
 
   }
+
+  /**
+   * TODO Turn around needs to rotate on the Y axis
+   * 
+   * Add the status to a log file that prints to the directory for each flight;
+   */
+
+  function turnaround() {
+
+    console.log('trurn around and around...');
+
+    action = action.then(function() {
+      return new Promise(function(resolve, reject) {
+
+        rollingSpider.frontFlip(function() {
+          console.log('frontflip!');
+          resolve();
+        });
+
+
+      });
+    });
+
+    return action;
+
+  }
+  /**
+   * Go forward
+   */
 
 
   /**
