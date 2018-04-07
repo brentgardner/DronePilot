@@ -10,9 +10,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 Install [Node.js](https://nodejs.org/en/)
 
-```
 you can download an install binary directly from [Node.js](https://nodejs.org/en/) or use your favorite [package manager](https://nodejs.org/en/download/package-manager/)
-```
+
+A Parrot MiniDrone or other Parrot drone:  [Parrot.com](https://www.parrot.com/)
 
 ### Installing
 
