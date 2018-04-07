@@ -19,7 +19,7 @@ A Parrot MiniDrone or other Parrot drone:  [Parrot.com](https://www.parrot.com/)
 ### Installing
 
 
-Download or fork the repository
+[Download](https://github.com/brentgardner/DronePilot/archive/master.zip) or fork the repository
 
 open your OS's console or the Node console
 
@@ -34,7 +34,7 @@ Install all the dependencies
 npm install
 ```
 
-Start the node server
+Run your web server using
 ```
 node app.js
 ```
