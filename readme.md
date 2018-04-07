@@ -2,6 +2,8 @@
 
 A node.js server, socket.io/express client for the Rabits to program a drone.  This was put together for the amazing children in the Rabbit class at the equally amazing [Riverfield Country Day School](http://www.riverfield.org/)
 
+The client allows the user to drag symbols into a visual program of actions that the drone will then execute.  The symbols where designed by the children in the Rabbit class but with a little adjusting you could replace the symbols with your own images.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
