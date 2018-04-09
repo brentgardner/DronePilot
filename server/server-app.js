@@ -86,7 +86,7 @@ io.on('connection', (socket) => {
     drone.turn({ direction })
       .then(function() {
         console.log('done rotating', direction);
-        socket.emit('logging', 'turn', direction):
+        socket.emit('logging', 'turn', direction);
       })
 
 

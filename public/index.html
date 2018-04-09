@@ -8,6 +8,15 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
 
     <style>
+        .card-header {
+            background: #2f579f;
+            color: white;
+        }
+
+        .card-header.command {
+            background: transparent;
+            color: black;
+        }
        
         .dropzone {
          
@@ -83,13 +92,13 @@
             <h5 class="card-header">Flight Plan</h5>  
             <div class='card' id="flightplan">
                     <div class="card-header command">
-                        <img id="btnturnleft" src="Turnon.jpg" />
+                        <img class="rounded mx-auto d-block" id="btnturnleft" src="Turnon.jpg" />
                     </div>
                     <div class="dropzone" >
                         <p>drag here...</p>
                     </div>
                     <div class="card-footer command">
-                        <img id="btnturnleft" src="Stop.jpg" />
+                        <img class="rounded mx-auto d-block" id="btnturnleft" src="Stop.jpg" />
                     </div>
             </div>
         </div>
