@@ -17,64 +17,79 @@
           padding: 10px;
         }
 
-        img{
+        .command img{
             height: 100px;
             width: 100px;
         }
+
+        #flightlogs { list-style-type: none; margin: 0; padding: 0; }
+        #flightlogs li { padding: 5px 10px; }
+        #flightlogs li:nth-child(odd) { background: #eee; }
+        #flightlogs { margin-bottom: 40px }
     </style>
 </head>
 <body>
 
   <div class="container">
     <div class="row">
-      <div class="col-auto">
+      <div class="col-sm">
         <div class="card" id="drone-app">
-          <h5 class="card-title">Dance Moves</h5>
+          <h5 class="card-header">Dance Moves</h5>
           
           
           <div class="card command">
-            <img id="btnturnleft" src="Turnleft.jpg" />
+            <img class="rounded mx-auto d-block" id="btnturnleft" src="Turnleft.jpg" draggable="false"/>
           </div>
 
           <div class="card command">
-            <img id="btnturnleft" src="Turnright.jpg" />
+            <img class="rounded mx-auto d-block" id="btnturnright" src="Turnright.jpg" draggable="false"/>
           </div>
 
           <div class="card command">
-            <img id="btnturnleft" src="Goup.jpg" />
+            <img class="rounded mx-auto d-block" id="btngoup" src="Goup.jpg" draggable="false" />
           </div>
 
           <div class="card command">
-            <img id="btnturnleft" src="Turnupsidedown.jpg" />
+            <img class="rounded mx-auto d-block" id="btngoupagain" src="Gouphigher.jpg" draggable="false"/>
           </div>
 
-          
+          <div class="card command">
+            <img class="rounded mx-auto d-block" id="btnturnupsidedown" src="Turnupsidedown.jpg" draggable="false"/>
+          </div>
 
           <div class="card command">
-              <button class="fas fa-fire-extinguisher fa-5x" id="btnemergency"></button>
+            <img class="rounded mx-auto d-block" id="btngoforward" src="Goforward.jpg" draggable="false"/>
+          </div>
+
+          <div class="card command">
+            <img class="rounded mx-auto d-block" id="btngobackward" src="Gobackwards.jpg" draggable="false"/>
+          </div>
+
+          <div class="card command">
+              <button class="fas fa-fire-extinguisher fa-5x " id="btnemergency" draggable="false"></button>
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-sm">
         <div class="card">
             <div id="drone-status">
-                <h5 class="card-title">Status</h5>
-
+                <h5 class="card-header">Flight Log</h5>
+                <ul id="flightlogs"></ul>
             </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-sm">
         <div class="card">
-            <h5 class="card-title">Flight Plan</h5>  
+            <h5 class="card-header">Flight Plan</h5>  
             <div class='card' id="flightplan">
-                    <div class="card-header">
-                        Take Off
+                    <div class="card-header command">
+                        <img id="btnturnleft" src="Turnon.jpg" />
                     </div>
                     <div class="dropzone" >
                         <p>drag here...</p>
                     </div>
-                    <div class="card-footer">
-                        Land
+                    <div class="card-footer command">
+                        <img id="btnturnleft" src="Stop.jpg" />
                     </div>
             </div>
         </div>
@@ -99,6 +114,10 @@
         alert("Ready!");
     });
 
+    socket.on('logging', function(msg){
+        $('#flightlogs').append($('<li>').text(msg));
+        window.scrollTo(0, document.body.scrollHeight);
+    });
     // btntakeoff.addEventListener('click', function() {
     // socket.emit('takeoff', socket.id);
     // });
@@ -192,6 +211,7 @@
         if ( event.target.className == "dropzone" ) {
             event.target.style.background = "";
             var nodeCopy = dragged.cloneNode(true);
+            console.log(nodeCopy);
             event.target.appendChild(nodeCopy);
         }
     

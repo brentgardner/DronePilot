@@ -25,7 +25,7 @@ open your OS's console or the Node console
 
 CD into the directory where you saved the repository and then into the dronepilot directory - You should see the app.js file.
 ```
-CD dronpilot
+CD dronepilot
 ```
 
 Install all the dependencies

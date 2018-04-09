@@ -47,7 +47,7 @@ app.get('*', function (req, res) {
 
 io.on('connection', (socket) => {
 
-  socket.emit('news', { hello: 'world' });
+  socket.emit('logging', 'connected...');
 
   socket.on('takeoff', () => {
     console.log('takeoff');
@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
     drone.takeoff()
       .then(function() {
         console.log('did take off!');
-        socket.emit('didTakeoff');
+        socket.emit('logging', 'did take off');
       });
 
   });
@@ -65,6 +65,7 @@ io.on('connection', (socket) => {
     drone.land()
       .then(function() {
         console.log('did land!');
+        socket.emit('logging', 'did land');
       });
 
   });
@@ -74,6 +75,7 @@ io.on('connection', (socket) => {
     drone.move({ direction })
       .then(function() {
         console.log('done moving', direction);
+        socket.emit('logging', 'move', direction);
       });
 
   });
@@ -84,6 +86,7 @@ io.on('connection', (socket) => {
     drone.turn({ direction })
       .then(function() {
         console.log('done rotating', direction);
+        socket.emit('logging', 'turn', direction):
       })
 
 

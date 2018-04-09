@@ -48,11 +48,11 @@ const drone = (function() {
 
         rollingSpider.flatTrim(function() {
           rollingSpider.takeOff(function() {
-            console.log('took off!');
+            console.log('drone did take off!');
           });
           resolve();
 
-          console.log('--- hovering---!');
+          console.log('drone is hovering...');
         });
 
 
@@ -70,12 +70,12 @@ const drone = (function() {
    */
   function land() {
 
-    console.log('land...');
+    console.log('landing...');
 
     action = action.then(function() {
       return new Promise(function(resolve, reject) {
         rollingSpider.land(function() {
-          console.log('landed!');
+          console.log('drone did land!');
           resolve();
         });
 
@@ -101,7 +101,7 @@ const drone = (function() {
 
         // Direction should be: `up`, `down`, `left`, or `right`
         rollingSpider[direction]({ speed, steps }, function() {
-          console.log('down!');
+          console.log('drone did move ', direction);
           resolve();
         });
 
@@ -130,7 +130,7 @@ const drone = (function() {
           'turnRight' : 'turnLeft';
 
         rollingSpider[methodName]({ speed, steps }, function() {
-          console.log('turned!', direction);
+          console.log('drone did turn ', direction);
           resolve();
         });
 
@@ -182,7 +182,7 @@ const drone = (function() {
       return new Promise(function(resolve, reject) {
 
         rollingSpider.frontFlip(function() {
-          console.log('frontflip!');
+          console.log('dene did a frontflip!');
           resolve();
         });
 
@@ -208,7 +208,7 @@ const drone = (function() {
       return new Promise(function(resolve, reject) {
 
         rollingSpider.frontFlip(function() {
-          console.log('frontflip!');
+          console.log('drone did turn around!');
           resolve();
         });
 
