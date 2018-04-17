@@ -19,13 +19,18 @@
         }
        
         .dropzone {
-         
-          height: 400px;
-          
+          height: 200px;
           margin-bottom: 10px;
           padding: 10px;
+          overflow: scroll;
         }
-
+        
+        #moves {
+         height: 400px;
+          margin-bottom: 10px;
+          padding: 10px;
+          overflow: scroll;
+        }
         .command img{
             height: 100px;
             width: 100px;
@@ -35,6 +40,11 @@
         #flightlogs li { padding: 5px 10px; }
         #flightlogs li:nth-child(odd) { background: #eee; }
         #flightlogs { margin-bottom: 40px }
+
+        #btngo { color: green; }
+
+        #flightplan {  height: 500px, }
+
     </style>
 </head>
 <body>
@@ -45,35 +55,35 @@
         <div class="card" id="drone-app">
           <h5 class="card-header">Dance Moves</h5>
           
-          
-          <div class="card command">
-            <img class="rounded mx-auto d-block" id="btnturnleft" src="Turnleft.jpg" draggable="false"/>
-          </div>
+          <div class="card" id="moves">
+            <div class="card command">
+                <img class="rounded mx-auto d-block" id="btnturnleft" src="Turnleft.jpg" draggable="false" />
+            </div>
 
-          <div class="card command">
-            <img class="rounded mx-auto d-block" id="btnturnright" src="Turnright.jpg" draggable="false"/>
-          </div>
+            <div class="card command">
+                <img class="rounded mx-auto d-block" id="btnturnright" src="Turnright.jpg" draggable="false" />
+            </div>
 
-          <div class="card command">
-            <img class="rounded mx-auto d-block" id="btngoup" src="Goup.jpg" draggable="false" />
-          </div>
+            <div class="card command">
+                <img class="rounded mx-auto d-block" id="btngoup" src="Goup.jpg" draggable="false" />
+            </div>
 
-          <div class="card command">
-            <img class="rounded mx-auto d-block" id="btngoupagain" src="Gouphigher.jpg" draggable="false"/>
-          </div>
+            <div class="card command">
+                <img class="rounded mx-auto d-block" id="btngoupagain" src="Gouphigher.jpg" draggable="false" />
+            </div>
 
-          <div class="card command">
-            <img class="rounded mx-auto d-block" id="btnturnupsidedown" src="Turnupsidedown.jpg" draggable="false"/>
-          </div>
+            <div class="card command">
+                <img class="rounded mx-auto d-block" id="btnturnupsidedown" src="Turnupsidedown.jpg" draggable="false" />
+            </div>
 
-          <div class="card command">
-            <img class="rounded mx-auto d-block" id="btngoforward" src="Goforward.jpg" draggable="false"/>
-          </div>
+            <div class="card command">
+                <img class="rounded mx-auto d-block" id="btngoforward" src="Goforward.jpg" draggable="false" />
+            </div>
 
-          <div class="card command">
-            <img class="rounded mx-auto d-block" id="btngobackward" src="Gobackwards.jpg" draggable="false"/>
+            <div class="card command">
+                <img class="rounded mx-auto d-block" id="btngobackward" src="Gobackwards.jpg" draggable="false" />
+            </div>
           </div>
-
           <div class="card command">
               <button class="fas fa-fire-extinguisher fa-5x " id="btnemergency" draggable="false"></button>
           </div>
@@ -85,6 +95,7 @@
                 <h5 class="card-header">Flight Log</h5>
                 <ul id="flightlogs"></ul>
             </div>
+            
         </div>
       </div>
       <div class="col-sm">
@@ -92,13 +103,16 @@
             <h5 class="card-header">Flight Plan</h5>  
             <div class='card' id="flightplan">
                     <div class="card-header command">
-                        <img class="rounded mx-auto d-block" id="btnturnleft" src="Turnon.jpg" />
+                        <img class="rounded mx-auto d-block" id="btntakeoff" src="Turnon.jpg" />
                     </div>
                     <div class="dropzone" >
                         <p>drag here...</p>
                     </div>
                     <div class="card-footer command">
-                        <img class="rounded mx-auto d-block" id="btnturnleft" src="Stop.jpg" />
+                        <img class="rounded mx-auto d-block" id="btnland" src="Stop.jpg" />
+                    </div>
+                    <div class="card command">
+                        <button class="fas fa-play-circle fa-5x" id="btngo" draggable="false"></button>
                     </div>
             </div>
         </div>
