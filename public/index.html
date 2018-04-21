@@ -2,50 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Drone</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Drone Pilot</title>
+ 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
-
-    <style>
-        .card-header {
-            background: #2f579f;
-            color: white;
-        }
-
-        .card-header.command {
-            background: transparent;
-            color: black;
-        }
-       
-        .dropzone {
-          height: 200px;
-          margin-bottom: 10px;
-          padding: 10px;
-          overflow: scroll;
-        }
-        
-        #moves {
-         height: 400px;
-          margin-bottom: 10px;
-          padding: 10px;
-          overflow: scroll;
-        }
-        .command img{
-            height: 100px;
-            width: 100px;
-        }
-
-        #flightlogs { list-style-type: none; margin: 0; padding: 0; }
-        #flightlogs li { padding: 5px 10px; }
-        #flightlogs li:nth-child(odd) { background: #eee; }
-        #flightlogs { margin-bottom: 40px }
-
-        #btngo { color: green; }
-
-        #flightplan {  height: 500px, }
-
-    </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -53,34 +14,34 @@
     <div class="row">
       <div class="col-sm">
         <div class="card" id="drone-app">
-          <h5 class="card-header">Dance Moves</h5>
+          <h5 class="card-header">Moves</h5>
           
           <div class="card" id="moves">
-            <div class="card command">
-                <img class="rounded mx-auto d-block" id="btnturnleft" src="Turnleft.jpg" draggable="false" />
+            <div class="card command" data-action="turn-left">
+                <img class="card-img-top rounded mx-auto d-block" id="btnturnleft" src="Turnleft.jpg" draggable="false" />
             </div>
 
-            <div class="card command">
-                <img class="rounded mx-auto d-block" id="btnturnright" src="Turnright.jpg" draggable="false" />
+            <div class="card command" data-action="turn-right">
+                <img class="rounded mx-auto d-block"   id="btnturnright" src="Turnright.jpg" draggable="false" />
             </div>
 
-            <div class="card command">
+            <div class="card command" data-action="move-up">
                 <img class="rounded mx-auto d-block" id="btngoup" src="Goup.jpg" draggable="false" />
             </div>
 
-            <div class="card command">
+            <div class="card command" data-action="move-up-again">
                 <img class="rounded mx-auto d-block" id="btngoupagain" src="Gouphigher.jpg" draggable="false" />
             </div>
 
-            <div class="card command">
+            <div class="card command" data-action="front-flip">
                 <img class="rounded mx-auto d-block" id="btnturnupsidedown" src="Turnupsidedown.jpg" draggable="false" />
             </div>
 
-            <div class="card command">
+            <div class="card command" data-action="move-forward">
                 <img class="rounded mx-auto d-block" id="btngoforward" src="Goforward.jpg" draggable="false" />
             </div>
 
-            <div class="card command">
+            <div class="card command" data-action="move-backward">
                 <img class="rounded mx-auto d-block" id="btngobackward" src="Gobackwards.jpg" draggable="false" />
             </div>
           </div>
@@ -95,150 +56,197 @@
                 <h5 class="card-header">Flight Log</h5>
                 <ul id="flightlogs"></ul>
             </div>
-            
         </div>
       </div>
       <div class="col-sm">
         <div class="card">
             <h5 class="card-header">Flight Plan</h5>  
             <div class='card' id="flightplan">
+                <div class="card" id="flightplanwrapper">
                     <div class="card-header command">
                         <img class="rounded mx-auto d-block" id="btntakeoff" src="Turnon.jpg" />
                     </div>
-                    <div class="dropzone" >
+                    <div id="dropzone">
                         <p>drag here...</p>
                     </div>
                     <div class="card-footer command">
                         <img class="rounded mx-auto d-block" id="btnland" src="Stop.jpg" />
                     </div>
-                    <div class="card command">
-                        <button class="fas fa-play-circle fa-5x" id="btngo" draggable="false"></button>
-                    </div>
+                </div>
+                <div class="card command">
+                    <button class="fas fa-play-circle fa-5x" id="btngo" draggable="false"></button>
+                </div>
             </div>
         </div>
       </div>
     </div>
-    
-    
   </div>
 
   <!--socket.io.js is automatically added by node-->
   <script src="socket.io/socket.io.js"></script>
   <!--jQuery Used For Some Frontend Tasks-->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <script>
-    //Connecting To socket.io
-    var socket = io.connect();
-    socket.on("Connection",function(){
-        alert("Ready!");
-    });
+      $(function () {
+        //Connecting To socket.io
+        var socket = io();
 
-    socket.on('logging', function(msg){
-        $('#flightlogs').append($('<li>').text(msg));
-        window.scrollTo(0, document.body.scrollHeight);
-    });
-    // btntakeoff.addEventListener('click', function() {
-    // socket.emit('takeoff', socket.id);
-    // });
-
-    // btnland.addEventListener('click', function() {
-    // socket.emit('land', socket.id);
-    // });
-
-    // btnturnleft.addEventListener('click', function() {
-    // socket.emit('turn','left', socket.id);
-    // });
-
-    // btnturnright.addEventListener('click', function() {
-    // socket.emit('turn', 'right', socket.id);
-    // });
-
-    // btnup.addEventListener('click', function() {
-    // socket.emit('up', socket.id);
-    // });
-
-    // btndown.addEventListener('click', function() {
-    // socket.emit('down', socket.id);
-    // });
-
-    // btnfrontflip.addEventListener('click', function() {
-    // socket.emit('frontflip', socket.id);
-    // });
-
-    // btnemergency.addEventListener('click', function() {
-    // socket.emit('emergency', socket.id);
-    // });
-
-    var commands = document.getElementsByClassName('command'), el = null;
-
-    for (var i = 0; i < commands.length; i++) {
-        el = commands[i];
-        
-        el.setAttribute('draggable', 'true');
-    
-        el.addEventListener('dragstart', function (e) {
-        e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
-        e.dataTransfer.setData('Text', this.id); // required otherwise doesn't work
+        socket.on("Connection",function(){
+            alert("Ready!");
         });
-    }
 
-  var dragged;
+        btntakeoff.addEventListener('click', function() {
+            socket.emit('takeoff', socket.id);
+        });
 
-    /* events fired on the draggable target */
-    document.addEventListener("drag", function( event ) {
+        btnland.addEventListener('click', function() {
+            socket.emit('land', socket.id);
+        });
 
-    }, false);
+        btnturnleft.addEventListener('click', function() {
+            socket.emit('turn','left', socket.id);
+        });
 
-    document.addEventListener("dragstart", function( event ) {
-        // store a ref. on the dragged elem
-        dragged = event.target;
-        // make it half transparent
-        event.target.style.opacity = .5;
-    }, false);
+        btnturnright.addEventListener('click', function() {
+            socket.emit('turn', 'right', socket.id);
+        });
 
-    document.addEventListener("dragend", function( event ) {
-        // reset the transparency
-        event.target.style.opacity = "";
-    }, false);
+        btngoup.addEventListener('click', function() {
+            socket.emit('up', socket.id);
+        });
 
-    /* events fired on the drop targets */
-    document.addEventListener("dragover", function( event ) {
-        // prevent default to allow drop
-        event.preventDefault();
-    }, false);
+        btngoupagain.addEventListener('click', function() {
+            socket.emit('up', socket.id);
+            socket.emit('up', socket.id);
+        });
 
-    document.addEventListener("dragenter", function( event ) {
-        // highlight potential drop target when the draggable element enters it
-        if ( event.target.className == "dropzone" ) {
-            event.target.style.background = "purple";
+        //btndown.addEventListener('click', function() {
+        //socket.emit('down', socket.id);
+        //});
+
+        //btnfrontflip.addEventListener('click', function() {
+        //socket.emit('frontflip', socket.id);
+        //});
+
+        btnemergency.addEventListener('click', function() {
+        socket.emit('emergency', socket.id);
+        });
+
+        btngo.addEventListener('click', function() {
+            socket.emit('logging', "time to dance!");
+
+            var moves = document.getElementById('dropzone').getElementsByClassName('command')
+
+            for (i = 0; i < moves.length; i++) { 
+                console.log(moves[i].getAttribute('data-action'));
+                
+                socket.emit('takeoff', socket.id);
+
+                switch(moves[i].getAttribute('data-action')) {
+                    case 'turn-left':
+                        socket.emit('turn','left', socket.id);
+                        break;
+                    case 'turn-right':
+                        socket.emit('turn', 'right', socket.id);
+                        break;
+                    case 'move-up':
+                        socket.emit('up', socket.id);
+                        break;
+                    case 'move-up-again':
+                        socket.emit('up', socket.id);
+                        socket.emit('up', socket.id);
+                        break;
+                    case 'front-flip':
+                        socket.emit('frontflip', socket.id)
+                        break;
+                    case 'move-forward':
+                        socket.emit('move', 'right', socket.id);
+                        break;
+                    case 'move-backward':
+                        socket.emit('move', 'left', socket.id);
+                        break;  
+                }
+                
+                socket.emit('land', socket.id);
+            }   
+        });
+
+        var commands = document.getElementsByClassName('command'), el = null;
+
+        for (var i = 0; i < commands.length; i++) {
+            el = commands[i];
+            
+            el.setAttribute('draggable', 'true');
+        
+            el.addEventListener('dragstart', function (e) {
+            e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
+            e.dataTransfer.setData('Text', this.id); // required otherwise doesn't work
+            });
         }
 
-    }, false);
+    var dragged;
 
-    document.addEventListener("dragleave", function( event ) {
-        // reset background of potential drop target when the draggable element leaves it
-        if ( event.target.className == "dropzone" ) {
-            event.target.style.background = "";
-        }
+        /* events fired on the draggable target */
+        document.addEventListener("drag", function( event ) {
 
-    }, false);
+        }, false);
 
-    document.addEventListener("drop", function( event ) {
-        // prevent default action (open as link for some elements)
-        event.preventDefault();
-        // move dragged elem to the selected drop target
-        if ( event.target.className == "dropzone" ) {
-            event.target.style.background = "";
-            var nodeCopy = dragged.cloneNode(true);
-            console.log(nodeCopy);
-            event.target.appendChild(nodeCopy);
-        }
-    
-    }, false);
+        document.addEventListener("dragstart", function( event ) {
+            // store a ref. on the dragged elem
+            dragged = event.target;
+            // make it half transparent
+            event.target.style.opacity = .5;
+        }, false);
+
+        document.addEventListener("dragend", function( event ) {
+            // reset the transparency
+            event.target.style.opacity = "";
+        }, false);
+
+        /* events fired on the drop targets */
+        document.addEventListener("dragover", function( event ) {
+            // prevent default to allow drop
+            event.preventDefault();
+        }, false);
+
+        document.addEventListener("dragenter", function( event ) {
+            // highlight potential drop target when the draggable element enters it
+            if ( event.target.id == "dropzone" ) {
+                event.target.style.background = "purple";
+            }
+
+        }, false);
+
+        document.addEventListener("dragleave", function( event ) {
+            // reset background of potential drop target when the draggable element leaves it
+            if ( event.target.className == "dropzone" ) {
+                event.target.style.background = "";
+            }
+
+        }, false);
+
+        document.addEventListener("drop", function( event ) {
+            // prevent default action (open as link for some elements)
+            event.preventDefault();
+            // move dragged elem to the selected drop target
+            if ( event.target.id == "dropzone" ) {
+                event.target.style.background = "";
+                var nodeCopy = dragged.cloneNode(true);
+                console.log(nodeCopy);
+                event.target.appendChild(nodeCopy);
+            }
+        
+        }, false);
+
+        socket.on('logging', function(msg){
+            $('#flightlogs').append($('<li>').text(msg));
+            console.log("logging:", msg);
+        });
+
+      });
   </script>      
 </body>
 </html>

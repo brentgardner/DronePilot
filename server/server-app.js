@@ -47,6 +47,10 @@ app.get('*', function (req, res) {
 
 io.on('connection', (socket) => {
 
+  socket.on('logging', (msg) => {
+    console.log(msg);
+  })
+
   socket.emit('logging', 'connected...');
 
   socket.on('takeoff', () => {
@@ -55,7 +59,7 @@ io.on('connection', (socket) => {
     drone.takeoff()
       .then(function() {
         console.log('did take off!');
-        socket.emit('logging', 'did take off');
+        io.sockets.emit('logging', 'did take off');
       });
 
   });
@@ -65,7 +69,7 @@ io.on('connection', (socket) => {
     drone.land()
       .then(function() {
         console.log('did land!');
-        socket.emit('logging', 'did land');
+        socket.broadcast.emit('logging', 'did land');
       });
 
   });
@@ -75,27 +79,29 @@ io.on('connection', (socket) => {
     drone.move({ direction })
       .then(function() {
         console.log('done moving', direction);
-        socket.emit('logging', 'move', direction);
+        io.socket.emit('logging', 'move', direction);
       });
 
   });
 
   socket.on('turn', (direction) => {
     console.log('turn', direction);
-
+    
     drone.turn({ direction })
       .then(function() {
         console.log('done rotating', direction);
-        socket.emit('logging', 'turn', direction);
+        io.sockets.emit('logging', 'turn', direction);
       })
-
-
   });
 
   socket.on('up', (direction) => {
+
+    io.sockets.emit('logging', 'moved ' + direction);
+
     drone.move('up', direction)
       .then(function() {
         console.log('moved ', direction);
+        io.sockets.emit('logging', 'moved up');
       })
 
   });
@@ -104,6 +110,7 @@ io.on('connection', (socket) => {
     drone.move('down', direction)
       .then(function() {
         console.log('moved ', direction);
+        io.sockets.emit('logging', 'moved down');
       })
   });
 
@@ -111,6 +118,7 @@ io.on('connection', (socket) => {
     drone.frontflip()
       .then(function() {
         console.log('front flip');
+        io.sockets.emit('logging', 'front flip');
       })
   });
 
@@ -118,6 +126,8 @@ io.on('connection', (socket) => {
     drone.emergency()
       .then(function() {
         console.log('emergency');
+        io.sockets.emit('logging', 'emergency landing');
+        
       })
   });
 

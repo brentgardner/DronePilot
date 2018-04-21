@@ -13,8 +13,6 @@ const promise = new Promise(function(resolve, reject) {
       rollingSpider.startPing();
       rollingSpider.flatTrim();
 
-      
-
       // Resolve promise
       resolve();
 

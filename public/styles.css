@@ -1,0 +1,52 @@
+
+        html {
+            font-size: 16px;
+        } 
+
+        .card-header {
+            background: #2f579f;
+            color: white;
+        }
+
+        .card-header.command {
+            background: transparent;
+            color: black;
+            padding: 0px;
+        }
+       
+        .card-footer.command {
+            background: transparent;
+            color: black;
+            padding: 0px;            
+        }
+
+        #dropzone {
+            height: 300px;
+            margin-bottom: 10px;
+            padding: 10px;
+            overflow: scroll;
+        }
+        
+        #moves {
+            height: 600px;
+            margin-bottom: 10px;
+            padding: 10px;
+            overflow: scroll;
+        }
+
+        #moves.card {
+            cursor:pointer;
+        }
+
+        .command img{
+            height: 5em;
+            width: 5em;
+        }
+
+        #flightlogs { list-style-type: none; margin: 0; padding: 0; }
+        #flightlogs li { padding: 5px 10px; }
+        #flightlogs li:nth-child(odd) { background: #eee; }
+        #flightlogs { margin-bottom: 40px }
+
+        #btngo { color: green; }
+
