@@ -90,6 +90,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+
       $(function () {
         //Connecting To socket.io
         var socket = io();
@@ -139,40 +144,50 @@
             socket.emit('logging', "time to dance!");
 
             var moves = document.getElementById('dropzone').getElementsByClassName('command')
-
+            
+            socket.emit('takeoff', socket.id);
+            
             for (i = 0; i < moves.length; i++) { 
                 console.log(moves[i].getAttribute('data-action'));
                 
-                socket.emit('takeoff', socket.id);
-
-                switch(moves[i].getAttribute('data-action')) {
-                    case 'turn-left':
-                        socket.emit('turn','left', socket.id);
-                        break;
-                    case 'turn-right':
-                        socket.emit('turn', 'right', socket.id);
-                        break;
-                    case 'move-up':
-                        socket.emit('up', socket.id);
-                        break;
-                    case 'move-up-again':
-                        socket.emit('up', socket.id);
-                        socket.emit('up', socket.id);
-                        break;
-                    case 'front-flip':
-                        socket.emit('frontflip', socket.id)
-                        break;
-                    case 'move-forward':
-                        socket.emit('move', 'right', socket.id);
-                        break;
-                    case 'move-backward':
-                        socket.emit('move', 'left', socket.id);
-                        break;  
-                }
                 
-                socket.emit('land', socket.id);
-            }   
+                    switch(moves[i].getAttribute('data-action')) {
+                        case 'turn-left':
+                            socket.emit('turn','left', socket.id);
+                            break;
+                        case 'turn-right':
+                            socket.emit('turn', 'right', socket.id);
+                            break;
+                        case 'move-up':
+                            socket.emit('move','up', socket.id);
+                            break;
+                        case 'move-up-again':
+                            socket.emit('move','up', socket.id);
+                            socket.emit('move','up', socket.id);
+                            break;
+                        case 'move-down':
+                            socket.emit('move','down', socket.id);
+                            break;
+                        case 'front-flip':
+                            socket.emit('frontflip', socket.id); 
+                            break;
+                        case 'move-forward':
+                            socket.emit('move', 'right', socket.id);                 
+                            break;
+                        case 'move-backward':
+                            socket.emit('move', 'left', socket.id);
+                            break;  
+                    }
+                
+            } 
+            
+            socket.emit('land', socket.id);
         });
+
+        async function dance(movement, direction) {
+            socket.emit(movement, direction, socket.id);
+            await sleep(5000);
+        }
 
         var commands = document.getElementsByClassName('command'), el = null;
 

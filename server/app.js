@@ -46,7 +46,7 @@ const drone = (function() {
 
         rollingSpider.flatTrim(function() {
           rollingSpider.takeOff(function() {
-            console.log('drone did take off!');
+            //console.log('drone did take off!');
           });
           resolve();
 
@@ -73,7 +73,7 @@ const drone = (function() {
     action = action.then(function() {
       return new Promise(function(resolve, reject) {
         rollingSpider.land(function() {
-          console.log('drone did land!');
+          //console.log('drone did land!');
           resolve();
         });
 

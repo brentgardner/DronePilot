@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
     drone.takeoff()
       .then(function() {
         console.log('did take off!');
-        io.sockets.emit('logging', 'did take off');
+        io.sockets.emit('logging', 'I took off');
       });
 
   });
@@ -69,7 +69,7 @@ io.on('connection', (socket) => {
     drone.land()
       .then(function() {
         console.log('did land!');
-        socket.broadcast.emit('logging', 'did land');
+        socket.broadcast.emit('logging', 'I landed');
       });
 
   });
@@ -79,7 +79,7 @@ io.on('connection', (socket) => {
     drone.move({ direction })
       .then(function() {
         console.log('done moving', direction);
-        io.socket.emit('logging', 'move', direction);
+        io.socket.emit('logging', 'I moved ' + direction);
       });
 
   });
@@ -89,19 +89,17 @@ io.on('connection', (socket) => {
     
     drone.turn({ direction })
       .then(function() {
-        console.log('done rotating', direction);
-        io.sockets.emit('logging', 'turn', direction);
+        console.log('done rotating', { direction });
+        io.sockets.emit('logging', 'I turned ' + direction);
       })
   });
 
   socket.on('up', (direction) => {
 
-    io.sockets.emit('logging', 'moved ' + direction);
-
     drone.move('up', direction)
       .then(function() {
         console.log('moved ', direction);
-        io.sockets.emit('logging', 'moved up');
+        io.sockets.emit('logging', 'I moved up');
       })
 
   });
@@ -110,7 +108,7 @@ io.on('connection', (socket) => {
     drone.move('down', direction)
       .then(function() {
         console.log('moved ', direction);
-        io.sockets.emit('logging', 'moved down');
+        io.sockets.emit('logging', 'I moved down');
       })
   });
 
@@ -118,7 +116,7 @@ io.on('connection', (socket) => {
     drone.frontflip()
       .then(function() {
         console.log('front flip');
-        io.sockets.emit('logging', 'front flip');
+        io.sockets.emit('logging', 'I did front flip');
       })
   });
 
@@ -126,7 +124,7 @@ io.on('connection', (socket) => {
     drone.emergency()
       .then(function() {
         console.log('emergency');
-        io.sockets.emit('logging', 'emergency landing');
+        io.sockets.emit('logging', 'uh, oh! I did an emergency landing');
         
       })
   });
