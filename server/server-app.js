@@ -69,7 +69,8 @@ io.on('connection', (socket) => {
     drone.land()
       .then(function() {
         console.log('did land!');
-        socket.broadcast.emit('logging', 'I landed');
+        io.socket.emit('logging', 'I landed');
+        io.socket.emit('logging', 'Thanks for flying!');
       });
 
   });

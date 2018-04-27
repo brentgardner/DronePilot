@@ -145,49 +145,64 @@
 
             var moves = document.getElementById('dropzone').getElementsByClassName('command')
             
-            socket.emit('takeoff', socket.id);
+
+            var queue = [];
+
+            var promise = socket.emit('takeoff', socket.id);
+            queue.push(promise);
             
             for (i = 0; i < moves.length; i++) { 
                 console.log(moves[i].getAttribute('data-action'));
                 
-                
                     switch(moves[i].getAttribute('data-action')) {
                         case 'turn-left':
-                            socket.emit('turn','left', socket.id);
+                            var promise = socket.emit('turn','left', socket.id);
+                            queue.push(promise);
                             break;
                         case 'turn-right':
-                            socket.emit('turn', 'right', socket.id);
+                            var promise = socket.emit('turn', 'right', socket.id);
+                            queue.push(promise);
                             break;
                         case 'move-up':
-                            socket.emit('move','up', socket.id);
+                            var promise = socket.emit('move','up', socket.id);
+                            queue.push(promise);
                             break;
                         case 'move-up-again':
-                            socket.emit('move','up', socket.id);
-                            socket.emit('move','up', socket.id);
+                            var promise = socket.emit('move','up', socket.id);
+                            queue.push(promise);
+                            var promise = socket.emit('move','up', socket.id);
+                            queue.push(promise);
                             break;
                         case 'move-down':
-                            socket.emit('move','down', socket.id);
+                            var promise = socket.emit('move','down', socket.id);
+                            queue.push(promise);
                             break;
                         case 'front-flip':
-                            socket.emit('frontflip', socket.id); 
+                            var promise = socket.emit('frontflip', socket.id); 
+                            queue.push(promise);
                             break;
                         case 'move-forward':
-                            socket.emit('move', 'right', socket.id);                 
+                            var promise = socket.emit('move', 'right', socket.id);  
+                            queue.push(promise);               
                             break;
                         case 'move-backward':
-                            socket.emit('move', 'left', socket.id);
+                            var promise = socket.emit('move', 'left', socket.id);
+                            queue.push(promise);
                             break;  
                     }
-                
             } 
             
-            socket.emit('land', socket.id);
+            var promise = socket.emit('land', socket.id);
+            queue.push(promise);
+
+            async function dance(queue) {
+                for (const promise of queue) {
+                    await promise;
+                }
+            }
         });
 
-        async function dance(movement, direction) {
-            socket.emit(movement, direction, socket.id);
-            await sleep(5000);
-        }
+        
 
         var commands = document.getElementsByClassName('command'), el = null;
 
