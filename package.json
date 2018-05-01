@@ -1,7 +1,7 @@
 {
   "name": "dronepilot",
   "version": "1.0.0",
-  "description": "a fancy little drone programmer for pre literate folks",
+  "description": "a fancy little drone programmer for pre-literate folks",
   "main": "app.js",
   "author": "Brent Gardner",
   "license": "ISC",
