@@ -108,30 +108,30 @@
             alert("Ready!");
         });
 
-        btntakeoff.addEventListener('click', function() {
-            socket.emit('takeoff', socket.id);
-        });
+        // btntakeoff.addEventListener('click', function() {
+        //     socket.emit('takeoff', socket.id);
+        // });
 
-        btnland.addEventListener('click', function() {
-            socket.emit('land', socket.id);
-        });
+        // btnland.addEventListener('click', function() {
+        //     socket.emit('land', socket.id);
+        // });
 
-        btnturnleft.addEventListener('click', function() {
-            socket.emit('turn','left', socket.id);
-        });
+        // btnturnleft.addEventListener('click', function() {
+        //     socket.emit('turn','left', socket.id);
+        // });
 
-        btnturnright.addEventListener('click', function() {
-            socket.emit('turn', 'right', socket.id);
-        });
+        // btnturnright.addEventListener('click', function() {
+        //     socket.emit('turn', 'right', socket.id);
+        // });
 
-        btngoup.addEventListener('click', function() {
-            socket.emit('up', socket.id);
-        });
+        // btngoup.addEventListener('click', function() {
+        //     socket.emit('up', socket.id);
+        // });
 
-        btngoupagain.addEventListener('click', function() {
-            socket.emit('up', socket.id);
-            socket.emit('up', socket.id);
-        });
+        // btngoupagain.addEventListener('click', function() {
+        //     socket.emit('up', socket.id);
+        //     socket.emit('up', socket.id);
+        // });
 
         //btndown.addEventListener('click', function() {
         //socket.emit('down', socket.id);
@@ -220,6 +220,24 @@
             e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
             e.dataTransfer.setData('Text', this.id); // required otherwise doesn't work
             });
+
+            el.addEventListener('touchstart', function (e) {
+            e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
+            e.dataTransfer.setData('Text', this.id); // required otherwise doesn't work
+            });
+
+            el.addEventListener("click", function( e) {
+            // prevent default action (open as link for some elements)
+                e.preventDefault();
+                // move dragged elem to the selected drop target
+                
+                    var dropzone = document.getElementById("dropzone");
+                    var nodeCopy = e.target.parentNode.cloneNode(true);
+                    console.log(nodeCopy);
+                    dropzone.appendChild(nodeCopy);
+                
+        
+            }, false);
         }
 
     var dragged;
@@ -236,7 +254,19 @@
             event.target.style.opacity = .5;
         }, false);
 
+        document.addEventListener("touch", function( event ) {
+            // store a ref. on the dragged elem
+            dragged = event.target;
+            // make it half transparent
+            event.target.style.opacity = .5;
+        }, false);
+
         document.addEventListener("dragend", function( event ) {
+            // reset the transparency
+            event.target.style.opacity = "";
+        }, false);
+
+        document.addEventListener("touchend", function( event ) {
             // reset the transparency
             event.target.style.opacity = "";
         }, false);
@@ -269,12 +299,15 @@
             // move dragged elem to the selected drop target
             if ( event.target.id == "dropzone" ) {
                 event.target.style.background = "";
+                dragged.style.opacity = "";
                 var nodeCopy = dragged.cloneNode(true);
                 console.log(nodeCopy);
                 event.target.appendChild(nodeCopy);
             }
         
         }, false);
+
+        
 
         socket.on('logging', function(msg){
             $('#flightlogs').append($('<li>').text(msg));
