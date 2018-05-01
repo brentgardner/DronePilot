@@ -17,6 +17,6 @@
     "temporal": "^0.6.0"
   },
   "scripts": {
-    "start":"node app.js & open http://localhost:3005"
+    "start":"sudo npm app.js & xdg-open http://localhost:3005"
   }
 }

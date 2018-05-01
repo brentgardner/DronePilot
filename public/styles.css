@@ -8,13 +8,13 @@
             color: white;
         }
 
-        .card-header.command {
+        .card-header.nonecommand {
             background: transparent;
             color: black;
             padding: 0px;
         }
        
-        .card-footer.command {
+        .card-footer.nonecommand {
             background: transparent;
             color: black;
             padding: 0px;            
@@ -38,7 +38,7 @@
             cursor:pointer;
         }
 
-        .command img{
+        .command img, .nonecommand img{
             height: 5em;
             width: 5em;
         }
