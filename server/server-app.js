@@ -6,9 +6,14 @@ var path = require("path");
 var fs = require('fs');
 
 
+
 var drone = require('./app');
 
 var dir = path.join(__dirname+'/../public/');
+app.use('/js', express.static(__dirname + '/../node_modules/popper.js/dist')); // redirect bootstrap JS
+app.use('/js', express.static(__dirname + '/../node_modules/bootstrap/dist/js')); // redirect bootstrap JS
+app.use('/js', express.static(__dirname + '/../node_modules/jquery/dist')); // redirect JS jQuery
+app.use('/css', express.static(__dirname + '/../node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 
 var mime = {
     html: 'text/html',

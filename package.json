@@ -9,12 +9,19 @@
   },
   "author": "Brent Gardner",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brentgardner/DronePilot/repository.git"
+  },
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "chalk": "^2.3.2",
     "express": "^4.16.3",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "rolling-spider": "1.7.0",
     "socket.io": "^2.0.4",
-    "temporal": "^0.6.0",
-    "rolling-spider": "1.7.0"
+    "temporal": "^0.6.0"
   }
 }
