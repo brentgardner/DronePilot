@@ -5,10 +5,6 @@
   "main": "app.js",
   "author": "Brent Gardner",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/brentgardner/DronePilot/repository.git"
-  },
   "dependencies": {
     "bootstrap": "^4.1.1",
     "chalk": "^2.3.2",
